@@ -1,0 +1,8 @@
+django
+djangorestframework
+markdown
+django-filter
+django-crispy-forms
+coreapi
+django-cors-headers
+django-debug-toolbar
