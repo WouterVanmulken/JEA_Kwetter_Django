@@ -7,7 +7,8 @@ from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 
 from kwetter.models import Tweet, Account
-from serializers import UserSerializer, GroupSerializer, TweetSerializer, AccountSerializer
+# from serializers import UserSerializer, GroupSerializer, TweetSerializer, AccountSerializer
+from kwetter.serializers import UserSerializer, GroupSerializer, TweetSerializer, AccountSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
