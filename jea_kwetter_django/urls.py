@@ -14,7 +14,6 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 import debug_toolbar
-from django.conf.urls import url
 from django.contrib import admin
 
 from django.conf.urls import url, include
@@ -25,8 +24,8 @@ from kwetter import views
 
 from django.conf.urls import url
 from rest_framework_swagger.views import get_swagger_view
-
-schema_view = get_swagger_view(title='Pastebin API')
+# from rest_framework.authtoken import views as authorization_token_views
+# schema_view = get_swagger_view(title='Kwetter')
 
 API_TITLE = 'Kwetter'
 API_DESCRIPTION = 'Kwetter api implementation in django'
@@ -36,14 +35,17 @@ router.register(r'users', views.UserViewSet)
 router.register(r'accounts', views.AccountViewSet)
 router.register(r'groups', views.GroupViewSet)
 router.register(r'tweets', views.TweetViewSet)
+router.register(r'testaccount', views.TestAccountViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include(router.urls)),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^__debug__/', include(debug_toolbar.urls)),
     url(r'^docs/', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),
-    url(r'^swagger/', schema_view)
+    # url(r'^swagger/', schema_view),
+    # url(r'^api-token-auth/', authorization_token_views.obtain_auth_token),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^', include(router.urls)),
 ]

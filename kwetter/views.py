@@ -38,3 +38,8 @@ class AccountViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend, OrderingFilter, SearchFilter)
     ordering_fields = ('first_name', 'last_name', 'bio')
     search_fields = ('first_name', 'last_name', 'bio')
+
+
+class TestAccountViewSet(viewsets.ModelViewSet):
+    queryset = Account.objects.filter(id=1)
+    serializer_class = AccountSerializer
