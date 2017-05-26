@@ -9,6 +9,7 @@ from django.conf import settings
 
 
 class Account(models.Model):
+    username = models.CharField(max_length=100, unique=True)
     user = models.ForeignKey(User)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -27,7 +28,6 @@ class Tweet(models.Model):
 
     def __str__(self):
         return "{0} - {1} - {2}".format(self.timestamp, self.content, self.poster)
-
 
 # @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 # def create_auth_token(sender, instance=None, created=False, **kwargs):

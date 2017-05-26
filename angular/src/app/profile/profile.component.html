@@ -1,0 +1,79 @@
+<!--<script src="../account.ts"/>-->
+
+<!--<p>{{account | json}}</p>-->
+<!--<h1>userId_angular : {{userId}}</h1>-->
+
+<div *ngIf="account">
+  <div *ngIf="loggedIn !=account.id">
+    <div *ngIf="isFollowing()">
+      <button id="unfollowBtn"
+                     type="submit"
+                     class="btn btn-danger float-right"
+                     (click)="follow()">Unfollow</button>
+    </div>
+    <div *ngIf="!isFollowing()">
+      <button type="submit"
+              (click)="follow()"
+              class="btn btn-primary float-right"
+              id="followBtn">Follow</button>
+    </div>
+  </div>
+
+
+  <h1>{{account.userName}}</h1>
+  <br/>
+  <h5>Bio</h5>
+  <p>{{account.bio}}</p>
+  <h5>Email</h5>
+  <p>{{account.email}}</p>
+  <h5>First name</h5>
+  <p>{{account.firstName}}</p>
+  <h5>Last name</h5>
+  <p>{{account.lastName}}</p>
+  <h3>Groups</h3>
+  <div *ngIf="!account.groups || account.groups.length == 0">
+    <p>No Groups could be found.</p>
+  </div>
+  <div *ngIf="account.groups">
+    <ul>
+      <li *ngFor="let group of account.groups">
+        {{group.groupName}}
+      </li>
+    </ul>
+  </div>
+  <h3>Tweets</h3>
+  <div *ngIf="!account.tweets || account.tweets.length == 0">
+    <p>No posted tweets could be found.</p>
+  </div>
+  <div *ngIf="account.tweets">
+    <ul>
+      <li *ngFor="let tweet of account.tweets">
+        {{tweet.date + " - " +tweet.content }}
+      </li>
+    </ul>
+  </div>
+
+  <h3>Following</h3>
+  <div *ngIf="!account.following || account.following.length == 0">
+    <p>The user currently follows 0 people.</p>
+  </div>
+  <div *ngIf="account.following">
+    <ul>
+      <li *ngFor="let followingAccount of account.following">
+        {{followingAccount.userName}}
+      </li>
+    </ul>
+  </div>
+
+  <h3>Followers</h3>
+  <div *ngIf="!followers|| followers.length == 0">
+    <p>No one is currently following the user.</p>
+  </div>
+  <div *ngIf="followers">
+    <ul>
+      <li *ngFor="let followersAccount of followers">
+        {{followersAccount.userName}}
+      </li>
+    </ul>
+  </div>
+</div>

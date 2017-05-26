@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework.filters import OrderingFilter, SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
+from django.db.models import Q
 
 # Create your views here.
 from django.contrib.auth.models import User, Group
@@ -8,7 +9,7 @@ from rest_framework import viewsets
 
 from kwetter.models import Tweet, Account
 # from serializers import UserSerializer, GroupSerializer, TweetSerializer, AccountSerializer
-from kwetter.serializers import UserSerializer, GroupSerializer, TweetSerializer, AccountSerializer
+from kwetter.serializers import UserSerializer, GroupSerializer, TweetSerializer, AccountSerializer, Tweet2Serializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -40,6 +41,10 @@ class AccountViewSet(viewsets.ModelViewSet):
     search_fields = ('first_name', 'last_name', 'bio')
 
 
-class TestAccountViewSet(viewsets.ModelViewSet):
-    queryset = Account.objects.filter(id=1)
-    serializer_class = AccountSerializer
+class PersonalTweets(viewsets.ReadOnlyModelViewSet):
+    def get_queryset(self):
+        id = self.kwargs['id']
+        current_user = Account.objects.filter(id=id).first()
+        following = current_user.following.all()
+        return Tweet.objects.filter(Q(poster_id=id) | Q(poster__in=following)).order_by('timestamp').reverse()
+    serializer_class = Tweet2Serializer

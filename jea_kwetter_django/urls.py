@@ -23,7 +23,7 @@ from rest_framework.documentation import include_docs_urls
 from kwetter import views
 
 from django.conf.urls import url
-from rest_framework_swagger.views import get_swagger_view
+# from rest_framework_swagger.views import get_swagger_view
 # from rest_framework.authtoken import views as authorization_token_views
 # schema_view = get_swagger_view(title='Kwetter')
 
@@ -35,7 +35,8 @@ router.register(r'users', views.UserViewSet)
 router.register(r'accounts', views.AccountViewSet)
 router.register(r'groups', views.GroupViewSet)
 router.register(r'tweets', views.TweetViewSet)
-router.register(r'testaccount', views.TestAccountViewSet)
+router.register(r'personaltweets/(?P<id>.+)', views.PersonalTweets,'personaltweets/')
+# router.register(r'testaccount', views.TestAccountViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

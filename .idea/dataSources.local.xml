@@ -2,8 +2,17 @@
 <project version="4">
   <component name="dataSourceStorageLocal">
     <data-source name="Sqlite (Xerial) - db.sqlite3" uuid="d2ce34da-5b7f-432f-b54f-7ffb45f7b887">
+      <database-info product="SQLite" version="3.16.1" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native" />
+      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
       <secret-storage>master_key</secret-storage>
       <auth-required>false</auth-required>
+      <introspection-schemas>*:</introspection-schemas>
+    </data-source>
+    <data-source name="Django default" uuid="8d1c2eb6-d547-4225-ab6e-2ee4557abef1">
+      <database-info product="SQLite" version="3.16.1" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native" />
+      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
+      <auth-required>false</auth-required>
+      <introspection-schemas>*:main</introspection-schemas>
     </data-source>
   </component>
 </project>

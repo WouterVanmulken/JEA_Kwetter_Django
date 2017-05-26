@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_filters',
     'debug_toolbar',
     # 'rest_framework_swagger',
+    'corsheaders',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -54,7 +55,10 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'jea_kwetter_django.urls'
 
@@ -123,10 +127,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAdminUser',
-        'rest_framework.permissions.IsAuthenticated',
-    ],
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAdminUser',
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ],
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
     # 'DEFAULT_AUTHENTICATION_CLASSES': (
     #     'rest_framework.authentication.TokenAuthentication',
     # ),
